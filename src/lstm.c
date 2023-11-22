@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void lstm_forward(Layer* self) {
-    LSTM* layer = (LSTM*)self;
-    printf("Forward pass for LSTM\n");
+void lstm_forward(struct NeuralNetworkLayer* self) {
+    LSTMLayer* layer = (LSTMLayer*)self;
+    printf("Forward pass for LSTM layer\n");
     // Add LSTM-specific forward pass logic here
 }
 
-LSTM* create_lstm() {
-    LSTM* layer = (LSTM*)malloc(sizeof(LSTM));
+LSTMLayer* create_lstm_layer() {
+    LSTMLayer* layer = (LSTMLayer*)malloc(sizeof(LSTMLayer));
     layer->base.forward = lstm_forward;
     layer->base.next_layers = NULL;
     layer->base.num_next_layers = 0;

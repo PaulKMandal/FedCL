@@ -1,25 +1,25 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -Wextra -pedantic -std=c99
 
-all: neural_network
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
 
-neural_network: layer.o cnn.o dense.o lstm.o main.o
-	$(CC) $^ -o $@
+SRCFILES = $(wildcard $(SRCDIR)/*.c)
+OBJFILES = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCFILES))
+TARGET = $(BINDIR)/neural_network
 
-layer.o: layer.c layer.h
-	$(CC) $(CFLAGS) -c $< -o $@
+.PHONY: all clean
 
-cnn.o: cnn.c cnn.h layer.h
-	$(CC) $(CFLAGS) -c $< -o $@
+all: $(TARGET)
 
-dense.o: dense.c dense.h layer.h
-	$(CC) $(CFLAGS) -c $< -o $@
+$(TARGET): $(OBJFILES)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $^ -o $@
 
-lstm.o: lstm.c lstm.h layer.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-main.o: main.c layer.h cnn.h dense.h lstm.h
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o neural_network
+	rm -rf $(OBJDIR) $(BINDIR)

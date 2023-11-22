@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void cnn_forward(Layer* self) {
-    CNN* layer = (CNN*)self;
-    printf("Forward pass for CNN\n");
+void cnn_forward(struct NeuralNetworkLayer* self) {
+    CNNLayer* layer = (CNNLayer*)self;
+    printf("Forward pass for CNN layer\n");
     // Add CNN-specific forward pass logic here
 }
 
-CNN* create_cnn() {
-    CNN* layer = (CNN*)malloc(sizeof(CNN));
+CNNLayer* create_cnn_layer() {
+    CNNLayer* layer = (CNNLayer*)malloc(sizeof(CNNLayer));
     layer->base.forward = cnn_forward;
     layer->base.next_layers = NULL;
     layer->base.num_next_layers = 0;
