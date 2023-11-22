@@ -5,11 +5,11 @@
 
 // Define the CNN layer structure
 typedef struct {
-    NeuralNetworkLayer base;
+    Layer base;
     // Add CNN-specific fields here
-} CNNLayer;
+} CNN;
 
-void cnn_forward(struct NeuralNetworkLayer* self);
-CNNLayer* create_cnn_layer();
+void cnn_forward(struct Layer* self);
+CNN* create_cnn();
 
 #endif  // CNN_H

@@ -5,11 +5,11 @@
 
 // Define the LSTM layer structure
 typedef struct {
-    NeuralNetworkLayer base;
+    Layer base;
     // Add LSTM-specific fields here
-} LSTMLayer;
+} LSTM;
 
-void lstm_forward(struct NeuralNetworkLayer* self);
-LSTMLayer* create_lstm_layer();
+void lstm_forward(struct Layer* self);
+LSTM* create_lstm();
 
 #endif  // LSTM_H

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void dfs_forward(NeuralNetworkLayer* layer) {
+void dfs_forward(Layer* layer) {
     if (layer == NULL) {
         return;
     }
@@ -14,7 +14,7 @@ void dfs_forward(NeuralNetworkLayer* layer) {
     }
 }
 
-void add_next_layer(NeuralNetworkLayer* current_layer, NeuralNetworkLayer* next_layer) {
-    current_layer->next_layers = realloc(current_layer->next_layers, (current_layer->num_next_layers + 1) * sizeof(NeuralNetworkLayer*));
+void add_layer(Layer* current_layer, Layer* next_layer) {
+    current_layer->next_layers = realloc(current_layer->next_layers, (current_layer->num_next_layers + 1) * sizeof(Layer*));
     current_layer->next_layers[current_layer->num_next_layers++] = next_layer;
 }

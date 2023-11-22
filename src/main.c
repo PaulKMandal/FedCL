@@ -5,21 +5,21 @@
 // Example usage
 int main() {
     // Create layers
-    CNNLayer* cnn_layer = create_cnn_layer();
-    FeedforwardLayer* ff_layer = create_feedforward_layer();
-    LSTMLayer* lstm_layer = create_lstm_layer();
+    CNN* cnn_layer = create_cnn();
+    Dense* dense_layer = create_dense();
+    LSTM* lstm_layer = create_lstm();
 
     // Connect layers
-    add_next_layer((NeuralNetworkLayer*)cnn_layer, (NeuralNetworkLayer*)ff_layer);
-    add_next_layer((NeuralNetworkLayer*)cnn_layer, (NeuralNetworkLayer*)lstm_layer);
-    add_next_layer((NeuralNetworkLayer*)ff_layer, (NeuralNetworkLayer*)lstm_layer);
+    add_layer((Layer*)cnn_layer, (Layer*)dense_layer);
+    add_layer((Layer*)cnn_layer, (Layer*)lstm_layer);
+    add_layer((Layer*)dense_layer, (Layer*)lstm_layer);
 
     // Perform forward pass for the entire network using DFS
-    dfs_forward((NeuralNetworkLayer*)cnn_layer);
+    dfs_forward((Layer*)cnn_layer);
 
     // Cleanup
     free(cnn_layer);
-    free(ff_layer);
+    free(dense_layer);
     free(lstm_layer);
 
     return 0;

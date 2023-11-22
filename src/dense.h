@@ -5,11 +5,11 @@
 
 // Define the Feedforward layer structure
 typedef struct {
-    NeuralNetworkLayer base;
+    Layer base;
     // Add Feedforward-specific fields here
-} FeedforwardLayer;
+} Dense;
 
-void feedforward_forward(struct NeuralNetworkLayer* self);
-FeedforwardLayer* create_feedforward_layer();
+void dense_forward(struct Layer* self);
+Dense* create_dense();
 
 #endif  // DENSE_H
