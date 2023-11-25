@@ -12,7 +12,9 @@ Dense* create_dense() {
     Dense* dense = (Dense*)malloc(sizeof(Dense));
     dense->base.forward = dense_forward;
     dense->base.next_layers = NULL;
+    dense->base.prev_layers = NULL;
     dense->base.num_next_layers = 0;
+    dense->base.num_prev_layers = 0;
     // Initialize Feedforward-specific fields here
     return dense;
 }
