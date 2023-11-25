@@ -1,9 +1,8 @@
 // cnn.c
-#include <stdio.h>
-#include <stdlib.h>
 #include "cnn.h"
+#include <stdio.h>
 
-CNN* create_cnn(void) {
+CNN* create_cnn() {
     CNN* cnn = (CNN*)malloc(sizeof(CNN));
     cnn->base.forward = cnn_forward;
     cnn->base.next_layers = NULL;
@@ -14,6 +13,8 @@ CNN* create_cnn(void) {
     return cnn;
 }
 
-void cnn_forward(Layer* self, double* input) {
+Tensor cnn_forward(Layer* self, Tensor* input) {
     printf("Forward pass for CNN layer\n");
+    // Placeholder return
+    return *input;
 }

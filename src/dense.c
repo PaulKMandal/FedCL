@@ -1,7 +1,6 @@
 // dense.c
-#include <stdio.h>
-#include <stdlib.h>
 #include "dense.h"
+#include <stdio.h>
 
 Dense* create_dense(size_t input_size, size_t output_size) {
     Dense* dense = (Dense*)malloc(sizeof(Dense));
@@ -14,55 +13,49 @@ Dense* create_dense(size_t input_size, size_t output_size) {
     dense->input_size = input_size;
     dense->output_size = output_size;
 
-    dense->weights = (double**)malloc(input_size * sizeof(double*));
+    size_t weight_dims[2] = {input_size, output_size};
+    size_t bias_dims[2] = {1, output_size};
+
+    dense->weights = allocate_tensor(weight_dims, DOUBLE);
+    dense->biases = allocate_tensor(bias_dims, DOUBLE);
+
     for (size_t i = 0; i < input_size; ++i) {
-        dense->weights[i] = (double*)malloc(output_size * sizeof(double));
         for (size_t j = 0; j < output_size; ++j) {
-            dense->weights[i][j] = 1.0;
+            *((double*)dense->weights.data[0][i] + j) = 1.0;
         }
     }
 
-    dense->biases = (double*)malloc(output_size * sizeof(double));
     for (size_t i = 0; i < output_size; ++i) {
-        dense->biases[i] = 0.0;
+        *((double*)dense->biases.data[0][0] + i) = 0.0;
     }
 
     return dense;
 }
 
-void free_dense(Dense* dense) {
-    for (size_t i = 0; i < dense->input_size; ++i) {
-        free(dense->weights[i]);
-    }
-    free(dense->weights);
-    free(dense->biases);
-    free(dense);
-}
-
-void dense_forward(Layer* self, double* input) {
+Tensor dense_forward(Layer* self, Tensor* input) {
     Dense* dense = (Dense*)self;
 
-    double* output = (double*)malloc(dense->output_size * sizeof(double));
+    Tensor output = allocate_tensor(&(dense->output_size), DOUBLE);
 
     for (size_t i = 0; i < dense->output_size; ++i) {
-        output[i] = dense->biases[i];
         for (size_t j = 0; j < dense->input_size; ++j) {
-            output[i] += input[j] * dense->weights[j][i];
+            *((double*)output.data[0][0] + i) += *((double*)input->data[0][j]) * *((double*)dense->weights.data[0][j] + i);
         }
+        *((double*)output.data[0][0] + i) += *((double*)dense->biases.data[0][0] + i);
     }
 
     printf("Forward pass for Dense layer\n");
     printf("Input: ");
     for (size_t i = 0; i < dense->input_size; ++i) {
-        printf("%f ", input[i]);
+        printf("%f ", *((double*)input->data[0][i]));
     }
     printf("\n");
 
     printf("Output: ");
     for (size_t i = 0; i < dense->output_size; ++i) {
-        printf("%f ", output[i]);
+        printf("%f ", *((double*)output.data[0][0] + i));
     }
     printf("\n");
 
-    free(output);
+    return output;
 }

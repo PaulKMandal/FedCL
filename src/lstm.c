@@ -1,9 +1,8 @@
 // lstm.c
-#include <stdio.h>
-#include <stdlib.h>
 #include "lstm.h"
+#include <stdio.h>
 
-LSTM* create_lstm(void) {
+LSTM* create_lstm() {
     LSTM* lstm = (LSTM*)malloc(sizeof(LSTM));
     lstm->base.forward = lstm_forward;
     lstm->base.next_layers = NULL;
@@ -14,6 +13,8 @@ LSTM* create_lstm(void) {
     return lstm;
 }
 
-void lstm_forward(Layer* self, double* input) {
+Tensor lstm_forward(Layer* self, Tensor* input) {
     printf("Forward pass for LSTM layer\n");
+    // Placeholder return
+    return *input;
 }

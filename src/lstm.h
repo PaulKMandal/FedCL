@@ -8,7 +8,7 @@ typedef struct {
     Layer base;
 } LSTM;
 
-LSTM* create_lstm(void);
-void lstm_forward(Layer* self, double* input);
+LSTM* create_lstm();
+Tensor lstm_forward(Layer* self, Tensor* input);
 
-#endif  // LSTM_H
+#endif // LSTM_H
