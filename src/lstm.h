@@ -1,15 +1,14 @@
+// lstm.h
 #ifndef LSTM_H
 #define LSTM_H
 
 #include "layer.h"
 
-// Define the LSTM layer structure
 typedef struct {
     Layer base;
-    // Add LSTM-specific fields here
 } LSTM;
 
-void lstm_forward(struct Layer* self);
-LSTM* create_lstm();
+LSTM* create_lstm(void);
+void lstm_forward(Layer* self, double* input);
 
 #endif  // LSTM_H

@@ -1,15 +1,19 @@
+// dense.h
 #ifndef DENSE_H
 #define DENSE_H
 
 #include "layer.h"
 
-// Define the Feedforward layer structure
 typedef struct {
     Layer base;
-    // Add Feedforward-specific fields here
+    size_t input_size;
+    size_t output_size;
+    double** weights;
+    double* biases;
 } Dense;
 
-void dense_forward(struct Layer* self);
-Dense* create_dense();
+Dense* create_dense(size_t input_size, size_t output_size);
+void free_dense(Dense* dense);
+void dense_forward(Layer* self, double* input);
 
 #endif  // DENSE_H

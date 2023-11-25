@@ -1,18 +1,16 @@
+// layer.h
 #ifndef LAYER_H
 #define LAYER_H
 
-#include <stddef.h>
-
-// Define the layer structure
 typedef struct Layer {
-    void (*forward)(struct Layer*);
-    struct Layer** next_layers;  // Array of pointers to next layers
-    struct Layer** prev_layers;  // Array of pointers to previous layers
-    size_t num_next_layers;  // Number of next layers
-    size_t num_prev_layers;  // Number of previous layers
+    void (*forward)(struct Layer*, double*);
+    struct Layer** next_layers;
+    struct Layer** prev_layers;
+    size_t num_next_layers;
+    size_t num_prev_layers;
 } Layer;
 
-void dfs_forward(Layer* layer);
+void dfs_forward(Layer* layer, double* input);
 void add_layer(Layer* current_layer, Layer* next_layer);
 
 #endif  // LAYER_H

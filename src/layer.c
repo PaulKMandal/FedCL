@@ -1,16 +1,14 @@
-#include "layer.h"
+// layer.c
 #include <stdio.h>
 #include <stdlib.h>
+#include "layer.h"
 
-void dfs_forward(Layer* layer) {
-    if (layer == NULL) {
-        return;
-    }
-
-    layer->forward(layer);
-
+void dfs_forward(Layer* layer, double* input) {
+    // DFS forward pass logic
+    // Call the forward method for each layer in a DFS manner
+    layer->forward(layer, input);
     for (size_t i = 0; i < layer->num_next_layers; ++i) {
-        dfs_forward(layer->next_layers[i]);
+        dfs_forward(layer->next_layers[i], input);
     }
 }
 
