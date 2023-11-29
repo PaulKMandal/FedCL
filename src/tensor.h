@@ -18,7 +18,10 @@ typedef struct Tensor {
     void*** data;
 } Tensor;
 
+Tensor create_tensor(size_t* dims, size_t n_dims, TensorType type, void*** data);
 Tensor allocate_tensor(size_t* dims, TensorType type);
+Tensor reshape_tensor(Tensor* tensor, size_t new_dimensions);
+Tensor permute_tensor(Tensor* tensor);
 void free_tensor(Tensor* tensor);
 
 #endif // TENSOR_H
