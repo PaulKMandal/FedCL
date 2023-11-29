@@ -8,7 +8,7 @@ typedef struct {
     Layer base;
 } CNN;
 
-CNN* create_cnn(void);
-void cnn_forward(Layer* self, double* input);
+CNN* create_cnn();
+Tensor cnn_forward(Layer* self, Tensor* input);
 
-#endif  // CNN_H
+#endif // CNN_H

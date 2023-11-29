@@ -8,12 +8,11 @@ typedef struct {
     Layer base;
     size_t input_size;
     size_t output_size;
-    double** weights;
-    double* biases;
+    Tensor weights;
+    Tensor biases;
 } Dense;
 
 Dense* create_dense(size_t input_size, size_t output_size);
-void free_dense(Dense* dense);
-void dense_forward(Layer* self, double* input);
+Tensor dense_forward(Layer* self, Tensor* input);
 
-#endif  // DENSE_H
+#endif // DENSE_H
