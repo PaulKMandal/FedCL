@@ -2,6 +2,14 @@
 #include "tensor.h"
 #include <stdio.h>
 
+Tensor create_tensor(size_t* dims, size_t n_dims, TensorType type, void*** data) {
+    Tensor tensor;  
+    
+    tensor = allocate_tensor(dims, type);
+    tensor.data = data;
+
+    return tensor;
+}
 
 Tensor allocate_tensor(size_t* dims, TensorType type) {
     Tensor tensor;
@@ -34,6 +42,20 @@ Tensor allocate_tensor(size_t* dims, TensorType type) {
     }
 
     return tensor;
+}
+
+Tensor reshape_tensor(Tensor* tensor, size_t new_dimensions) {
+    
+    // TODO: Implement logic for reshape tensor function  
+
+    return *tensor;
+}
+
+Tensor permute_tensor(Tensor* tensor) {
+    
+    // TODO: Implement logic for permute tensor function
+
+    return *tensor;
 }
 
 void free_tensor(Tensor* tensor) {
